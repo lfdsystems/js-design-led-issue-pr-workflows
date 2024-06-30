@@ -1,0 +1,27 @@
+# Name of the Action
+name: Issue Pinned
+
+# Event when this Action is triggered
+on:
+  issues:
+    types:
+      - pinned
+
+# Jobs that this Action will perform
+jobs:
+  issue-pinned:
+    name: Issue Pinned
+    runs-on: ubuntu-latest
+    steps:
+      # Initial Repository Checkout required to execute local action
+      - name: Checkout Repository
+        id: checkout-repository
+        uses: actions/checkout@main
+
+      # The local action that is to be executed
+      - name: Unpin the Issue
+        id: unpin-issue
+        if: steps.checkout-repository.outcome == 'success'
+        uses: ./.github/actions/issue-pinned
+        with:
+          GITHUBTOKEN: ${{ secrets.REPO_PAT }}

@@ -1,0 +1,18 @@
+# Action Details
+name: Issue Pinned
+description: This GitHub Action automatically unpins an issue immediately after it is pinned ensuring adherence to the repository policy of having no pinned issues
+author: LFD Systems
+
+# Define your inputs here
+inputs:
+  GITHUBTOKEN:
+    description: The GitHub Personal Access Token
+    default: ${{ github.token }}
+    required: true
+
+# Define your outputs here.
+
+# Runs On
+runs:
+  using: node20
+  main: dist/index.js
