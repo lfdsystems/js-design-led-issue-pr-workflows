@@ -29208,6 +29208,8 @@ async function RunAction() {
   try {
     // Define the variables for the workflow step here
     // Const Variables
+    const errMessage =
+      'Request failed due to following response errors:\n - The issue is not pinned or cannot be unpinned at this time'
     const issNodeId = actPAYLOAD.issue.node_id
     const gqlUnpinIssueMutation = `
       mutation UnpinIssue( $issNodeId: ID! ){
@@ -29239,11 +29241,15 @@ async function RunAction() {
       )
     } catch (error) {
       // Fail the workflow step if an error occurs
-      // TODO: Insert a Console Message for Failure - Unpin Issue Graphql
-      pkgCORE.setFailed(error.message)
-      pkgCORE.info(
-        `\u001b[1;38;2;255;255;0mThe Unpin Issue Graphql Response is shown below:\n${JSON.stringify(gqlUnpinIssueResponse, null, 2)}`
-      )
+      if (error.message.includes(errMessage)) {
+        // TODO: Insert a Console Message for Information - Unpin Issue Graphql
+      } else {
+        // TODO: Insert a Console Message for Failure - Unpin Issue Graphql
+        pkgCORE.setFailed(error.message)
+        pkgCORE.info(
+          `\u001b[1;38;2;255;255;0mThe Unpin Issue Graphql Response is shown below:\n${JSON.stringify(gqlUnpinIssueResponse, null, 2)}`
+        )
+      }
       return
     }
     // BLOCKEND: Unpin Issue Graphql Block
