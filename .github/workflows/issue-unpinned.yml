@@ -1,0 +1,27 @@
+# Name of the Action
+name: Issue Unpinned
+
+# Event when this Action is triggered
+on:
+  issues:
+    types:
+      - unpinned
+
+# Jobs that this Action will perform
+jobs:
+  issue-unpinned:
+    name: Issue Unpinned
+    runs-on: ubuntu-latest
+    steps:
+      # Initial Repository Checkout required to execute local action
+      - name: Checkout Repository
+        id: checkout-repository
+        uses: actions/checkout@main
+
+      # The local action that is to be executed
+      - name: Insert the Comment
+        id: insert-comment
+        if: steps.checkout-repository.outcome == 'success'
+        uses: ./.github/actions/issue-unpinned
+        with:
+          GITHUBTOKEN: ${{ secrets.REPO_PAT }}
