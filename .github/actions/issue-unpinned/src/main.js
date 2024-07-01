@@ -41,7 +41,9 @@ async function RunAction() {
           body: cmtBody
         })
 
-        // TODO: Insert a Console Message for Success - Create Comment Rest
+        pkgCORE.info(
+          '\u001b[1;38;2;0;255;0mThe comment has been successfully inserted.'
+        )
 
         // TODO: Display the Create Comment Rest Response - TO BE DELETED AFTER THE CODE IS FINALISED
         pkgCORE.info(
@@ -49,7 +51,9 @@ async function RunAction() {
         )
       } catch (error) {
         // Fail the workflow step if an error occurs
-        // TODO: Insert a Console Message for Failure - Create Comment Rest
+        pkgCORE.info(
+          '\u001b[1;38;2;255;0;0mAn error occurred while inserting the comment. The specific error encountered is mentioned below:'
+        )
         pkgCORE.setFailed(error.message)
         pkgCORE.info(
           `\u001b[1;38;2;255;255;0mThe Create Comment Rest Response is shown below:\n${JSON.stringify(rstCreateCommentResponse, null, 2)}`
@@ -58,7 +62,9 @@ async function RunAction() {
       }
       // BLOCKEND: Create Comment Rest Block
     } else {
-      // TODO: Insert a Console Message for Information - Manual Unpin Issue
+      pkgCORE.info(
+        '\u001b[1;38;2;255;255;0mThe issue has been manually unpinned, and the insert comment request has been cancelled.'
+      )
     }
 
     // TODO: Display the Action Payload - TO BE DELETED AFTER THE CODE IS FINALISED
