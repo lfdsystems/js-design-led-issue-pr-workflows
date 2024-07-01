@@ -29213,7 +29213,7 @@ async function RunAction() {
       '>[!Important]\n' +
       '>The _**' +
       `${gthREPONAME}` +
-      "**_ repository's **[policy](../blob/main/CONTRIBUTING.md)** states that issue _**cannot**_ be _**pinned**_.\n" +
+      "**_ repository's **[policy](../blob/main/CONTRIBUTING.md#repository-policies)** states that issue _**cannot**_ be _**pinned**_.\n" +
       '>\n' +
       '>Issues that are _**pinned**_ will be automatically _**unpinned**_.\n' +
       '>\n' +
