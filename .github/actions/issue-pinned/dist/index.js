@@ -29208,10 +29208,45 @@ async function RunAction() {
   try {
     // Define the variables for the workflow step here
     // Const Variables
+    const issNodeId = actPAYLOAD.issue.node_id
+    const gqlUnpinIssueMutation = `
+      mutation UnpinIssue( $issNodeId: ID! ){
+        unpinIssue( input: { issueId: $issNodeId }){
+          issue{
+            title
+          }
+        }
+      }
+    `
+    const gqlUnpinIssueVariables = { issNodeId }
 
     // Let Variables
+    let gqlUnpinIssueResponse
 
     // Write the workflow step code here
+    // BLOCKSTART: Unpin Issue Graphql Block
+    try {
+      gqlUnpinIssueResponse = await gthOCTOKIT.graphql(
+        gqlUnpinIssueMutation,
+        gqlUnpinIssueVariables
+      )
+
+      // TODO: Insert a Console Message for Success - Unpin Issue Graphql
+
+      // TODO: Display the Unpin Issue Graphql Response - TO BE DELETED AFTER THE CODE IS FINALISED
+      pkgCORE.info(
+        `\u001b[1;38;2;33;158;188mThe Unpin Issue Graphql Response is shown below:\n${JSON.stringify(gqlUnpinIssueResponse, null, 2)}`
+      )
+    } catch (error) {
+      // Fail the workflow step if an error occurs
+      // TODO: Insert a Console Message for Failure - Unpin Issue Graphql
+      pkgCORE.setFailed(error.message)
+      pkgCORE.info(
+        `\u001b[1;38;2;255;255;0mThe Unpin Issue Graphql Response is shown below:\n${JSON.stringify(gqlUnpinIssueResponse, null, 2)}`
+      )
+      return
+    }
+    // BLOCKEND: Unpin Issue Graphql Block
 
     // TODO: Display the Action Payload - TO BE DELETED AFTER THE CODE IS FINALISED
     pkgCORE.info(
