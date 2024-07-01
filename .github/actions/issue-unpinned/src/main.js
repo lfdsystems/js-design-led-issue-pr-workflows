@@ -15,10 +15,46 @@ async function RunAction() {
   try {
     // Define the variables for the workflow step here
     // Const Variables
+    const issNumber = actPAYLOAD.issue.number
+    const cmtBody =
+      '>[!Important]\n' +
+      '>The _**' +
+      `${gthREPONAME}` +
+      "**_ repository's **[policy](../blob/main/CONTRIBUTING.md)** states that issue _**cannot**_ be _**pinned**_.\n" +
+      '>\n' +
+      '>Issues that are _**pinned**_ will be automatically _**unpinned**_.\n' +
+      '>\n' +
+      '>As a result, this issue has been _**unpinned**_.'
 
     // Let Variables
+    let rstCreateCommentResponse
 
     // Write the workflow step code here
+    // BLOCKSTART: Create Comment Rest Block
+    try {
+      rstCreateCommentResponse = await gthOCTOKIT.rest.issues.createComment({
+        owner: repOWNERLOGIN,
+        repo: gthREPONAME,
+        issue_number: issNumber,
+        body: cmtBody
+      })
+
+      // TODO: Insert a Console Message for Success - Create Comment Rest
+
+      // TODO: Display the Create Comment Rest Response - TO BE DELETED AFTER THE CODE IS FINALISED
+      pkgCORE.info(
+        `\u001b[1;38;2;33;158;188mThe Create Comment Rest Response is shown below:\n${JSON.stringify(rstCreateCommentResponse, null, 2)}`
+      )
+    } catch (error) {
+      // Fail the workflow step if an error occurs
+      // TODO: Insert a Console Message for Failure - Create Comment Rest
+      pkgCORE.setFailed(error.message)
+      pkgCORE.info(
+        `\u001b[1;38;2;255;255;0mThe Create Comment Rest Response is shown below:\n${JSON.stringify(rstCreateCommentResponse, null, 2)}`
+      )
+      return
+    }
+    // BLOCKEND: Create Comment Rest Block
 
     // TODO: Display the Action Payload - TO BE DELETED AFTER THE CODE IS FINALISED
     pkgCORE.info(
