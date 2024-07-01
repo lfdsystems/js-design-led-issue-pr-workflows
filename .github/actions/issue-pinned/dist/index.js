@@ -29233,7 +29233,9 @@ async function RunAction() {
         gqlUnpinIssueVariables
       )
 
-      // TODO: Insert a Console Message for Success - Unpin Issue Graphql
+      pkgCORE.info(
+        '\u001b[1;38;2;0;255;0mThe issue has been successfully unpinned.'
+      )
 
       // TODO: Display the Unpin Issue Graphql Response - TO BE DELETED AFTER THE CODE IS FINALISED
       pkgCORE.info(
@@ -29242,9 +29244,13 @@ async function RunAction() {
     } catch (error) {
       // Fail the workflow step if an error occurs
       if (error.message.includes(errMessage)) {
-        // TODO: Insert a Console Message for Information - Unpin Issue Graphql
+        pkgCORE.info(
+          '\u001b[1;38;2;255;255;0mThe issue has been manually unpinned, and the unpin request has been cancelled.'
+        )
       } else {
-        // TODO: Insert a Console Message for Failure - Unpin Issue Graphql
+        pkgCORE.info(
+          '\u001b[1;38;2;255;0;0mAn error occurred while unpinning the issue. The specific error encountered is mentioned below:'
+        )
         pkgCORE.setFailed(error.message)
         pkgCORE.info(
           `\u001b[1;38;2;255;255;0mThe Unpin Issue Graphql Response is shown below:\n${JSON.stringify(gqlUnpinIssueResponse, null, 2)}`
