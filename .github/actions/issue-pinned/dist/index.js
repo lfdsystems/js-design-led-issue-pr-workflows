@@ -29236,11 +29236,6 @@ async function RunAction() {
       pkgCORE.info(
         '\u001b[1;38;2;0;255;0mThe issue has been successfully unpinned.'
       )
-
-      // TODO: Display the Unpin Issue Graphql Response - TO BE DELETED AFTER THE CODE IS FINALISED
-      pkgCORE.info(
-        `\u001b[1;38;2;33;158;188mThe Unpin Issue Graphql Response is shown below:\n${JSON.stringify(gqlUnpinIssueResponse, null, 2)}`
-      )
     } catch (error) {
       // Fail the workflow step if an error occurs
       if (error.message.includes(errMessage)) {
@@ -29259,11 +29254,6 @@ async function RunAction() {
       return
     }
     // BLOCKEND: Unpin Issue Graphql Block
-
-    // TODO: Display the Action Payload - TO BE DELETED AFTER THE CODE IS FINALISED
-    pkgCORE.info(
-      `\u001b[1;38;2;33;158;188mThe ACTION PAYLOAD is shown below:\n${JSON.stringify(actPAYLOAD, null, 2)}`
-    )
   } catch (error) {
     // This is the main function\'s catch block
     // Fail the workflow step if an error occurs
