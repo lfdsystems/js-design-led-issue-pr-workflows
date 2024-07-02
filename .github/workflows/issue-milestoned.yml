@@ -1,0 +1,27 @@
+# Name of the Action
+name: Issue Milestoned
+
+# Event when this Action is triggered
+on:
+  issues:
+    types:
+      - milestoned
+
+# Jobs that this Action will perform
+jobs:
+  issue-milestoned:
+    name: Issue Milestoned
+    runs-on: ubuntu-latest
+    steps:
+      # Initial Repository Checkout required to execute local action
+      - name: Checkout Repository
+        id: checkout-repository
+        uses: actions/checkout@main
+
+      # The local action that is to be executed
+      - name: Demilestone the Issue
+        id: demilestone-issue
+        if: steps.checkout-repository.outcome == 'success'
+        uses: ./.github/actions/issue-milestoned
+        with:
+          GITHUBTOKEN: ${{ secrets.REPO_PAT }}
