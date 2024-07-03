@@ -1,0 +1,18 @@
+# Action Details
+name: Issue Demilestoned
+description: This GitHub Action inserts a comment when an issue is automatically demilestoned informing about the repository policy of having no milestoned issues
+author: LFD Systems
+
+# Define your inputs here
+inputs:
+  GITHUBTOKEN:
+    description: The GitHub Personal Access Token
+    default: ${{ github.token }}
+    required: true
+
+# Define your outputs here.
+
+# Runs On
+runs:
+  using: node20
+  main: dist/index.js

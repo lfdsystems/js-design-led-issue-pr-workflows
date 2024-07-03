@@ -1,0 +1,27 @@
+# Name of the Action
+name: Issue Demilestoned
+
+# Event when this Action is triggered
+on:
+  issues:
+    types:
+      - demilestoned
+
+# Jobs that this Action will perform
+jobs:
+  issue-demilestoned:
+    name: Issue Demilestoned
+    runs-on: ubuntu-latest
+    steps:
+      # Initial Repository Checkout required to execute local action
+      - name: Checkout Repository
+        id: checkout-repository
+        uses: actions/checkout@main
+
+      # The local action that is to be executed
+      - name: Insert the Comment
+        id: insert-comment
+        if: steps.checkout-repository.outcome == 'success'
+        uses: ./.github/actions/issue-demilestoned
+        with:
+          GITHUBTOKEN: ${{ secrets.REPO_PAT }}
