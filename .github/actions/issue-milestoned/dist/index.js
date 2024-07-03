@@ -29208,10 +29208,37 @@ async function RunAction() {
   try {
     // Define the variables for the workflow step here
     // Const Variables
+    const issNumber = actPAYLOAD.issue.number
 
     // Let Variables
+    let rstUpdateIssueResponse
 
     // Write the workflow step code here
+    // BLOCKSTART: Update Issue Rest Block
+    try {
+      rstUpdateIssueResponse = await gthOCTOKIT.rest.issues.update({
+        owner: repOWNERLOGIN,
+        repo: gthREPONAME,
+        issue_number: issNumber,
+        milestone: null
+      })
+
+      // TODO: Insert a Console Message for Success - Update Issue Rest
+
+      // TODO: Display the Update Issue Rest Response - TO BE DELETED AFTER THE CODE IS FINALISED
+      pkgCORE.info(
+        `\u001b[1;38;2;33;158;188mThe Update Issue Rest Response is shown below:\n${JSON.stringify(rstUpdateIssueResponse, null, 2)}`
+      )
+    } catch (error) {
+      // Fail the workflow step if an error occurs
+      // TODO: Insert a Console Message for Failure - Update Issue Rest
+      pkgCORE.setFailed(error.message)
+      pkgCORE.info(
+        `\u001b[1;38;2;255;255;0mThe Update Issue Rest Response is shown below:\n${JSON.stringify(rstUpdateIssueResponse, null, 2)}`
+      )
+      return
+    }
+    // BLOCKEND: Update Issue Rest Block
 
     // TODO: Display the Action Payload - TO BE DELETED AFTER THE CODE IS FINALISED
     pkgCORE.info(
