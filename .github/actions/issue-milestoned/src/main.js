@@ -19,8 +19,34 @@ async function RunAction() {
 
     // Let Variables
     let rstUpdateIssueResponse
+    let rstGetIssueResponse
 
     // Write the workflow step code here
+    // BLOCKSTART: Get Issue Rest Block
+    try {
+      rstGetIssueResponse = await gthOCTOKIT.rest.issues.get({
+        owner: repOWNERLOGIN,
+        repo: gthREPONAME,
+        issue_number: issNumber
+      })
+
+      // TODO: Insert a Console Message for Success - Get Issue Rest
+
+      // TODO: Display the Get Issue Rest Response - TO BE DELETED AFTER THE CODE IS FINALISED
+      pkgCORE.info(
+        `\u001b[1;38;2;33;158;188mThe Get Issue Rest Response is shown below:\n${JSON.stringify(rstGetIssueResponse, null, 2)}`
+      )
+    } catch (error) {
+      // Fail the workflow step if an error occurs
+      // TODO: Insert a Console Message for Failure - Get Issue Rest
+      pkgCORE.setFailed(error.message)
+      pkgCORE.info(
+        `\u001b[1;38;2;255;255;0mThe Get Issue Rest Response is shown below:\n${JSON.stringify(rstGetIssueResponse, null, 2)}`
+      )
+      return
+    }
+    // BLOCKEND: Get Issue Rest Block
+
     // BLOCKSTART: Update Issue Rest Block
     try {
       rstUpdateIssueResponse = await gthOCTOKIT.rest.issues.update({
