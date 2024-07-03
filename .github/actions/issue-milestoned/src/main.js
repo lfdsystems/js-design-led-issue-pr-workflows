@@ -33,11 +33,6 @@ async function RunAction() {
       })
 
       issMilestoneDetails = rstGetIssueResponse.data.milestone
-
-      // TODO: Display the Get Issue Rest Response - TO BE DELETED AFTER THE CODE IS FINALISED
-      pkgCORE.info(
-        `\u001b[1;38;2;33;158;188mThe Get Issue Rest Response is shown below:\n${JSON.stringify(rstGetIssueResponse, null, 2)}`
-      )
     } catch (error) {
       // Fail the workflow step if an error occurs
       pkgCORE.info(
@@ -69,11 +64,6 @@ async function RunAction() {
           pkgCORE.info(
             '\u001b[1;38;2;0;255;0mThe issue has been successfully demilestoned.'
           )
-
-          // TODO: Display the Update Issue Rest Response - TO BE DELETED AFTER THE CODE IS FINALISED
-          pkgCORE.info(
-            `\u001b[1;38;2;33;158;188mThe Update Issue Rest Response is shown below:\n${JSON.stringify(rstUpdateIssueResponse, null, 2)}`
-          )
         } catch (error) {
           // Fail the workflow step if an error occurs
           pkgCORE.info(
@@ -92,11 +82,6 @@ async function RunAction() {
         )
       }
     }
-
-    // TODO: Display the Action Payload - TO BE DELETED AFTER THE CODE IS FINALISED
-    pkgCORE.info(
-      `\u001b[1;38;2;33;158;188mThe ACTION PAYLOAD is shown below:\n${JSON.stringify(actPAYLOAD, null, 2)}`
-    )
   } catch (error) {
     // This is the main function\'s catch block
     // Fail the workflow step if an error occurs
