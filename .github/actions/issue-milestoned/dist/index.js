@@ -29233,7 +29233,9 @@ async function RunAction() {
       )
     } catch (error) {
       // Fail the workflow step if an error occurs
-      // TODO: Insert a Console Message for Failure - Get Issue Rest
+      pkgCORE.info(
+        '\u001b[1;38;2;255;0;0mAn error occurred while getting the issue details. The specific error encountered is mentioned below:'
+      )
       pkgCORE.setFailed(error.message)
       pkgCORE.info(
         `\u001b[1;38;2;255;255;0mThe Get Issue Rest Response is shown below:\n${JSON.stringify(rstGetIssueResponse, null, 2)}`
@@ -29243,7 +29245,9 @@ async function RunAction() {
     // BLOCKEND: Get Issue Rest Block
 
     if (issMilestoneDetails === null) {
-      // TODO: Insert Console Message for Information
+      pkgCORE.info(
+        '\u001b[1;38;2;255;255;0mThe issue has been manually demilestoned, and the demilestone request has been cancelled.'
+      )
     } else {
       if (issMilestoneDetails.title === issCurrentMilestoneTitle) {
         // BLOCKSTART: Update Issue Rest Block
@@ -29255,7 +29259,9 @@ async function RunAction() {
             milestone: null
           })
 
-          // TODO: Insert a Console Message for Success - Update Issue Rest
+          pkgCORE.info(
+            '\u001b[1;38;2;0;255;0mThe issue has been successfully demilestoned.'
+          )
 
           // TODO: Display the Update Issue Rest Response - TO BE DELETED AFTER THE CODE IS FINALISED
           pkgCORE.info(
@@ -29263,7 +29269,9 @@ async function RunAction() {
           )
         } catch (error) {
           // Fail the workflow step if an error occurs
-          // TODO: Insert a Console Message for Failure - Update Issue Rest
+          pkgCORE.info(
+            '\u001b[1;38;2;255;0;0mAn error occurred while demilestoning the issue. The specific error encountered is mentioned below:'
+          )
           pkgCORE.setFailed(error.message)
           pkgCORE.info(
             `\u001b[1;38;2;255;255;0mThe Update Issue Rest Response is shown below:\n${JSON.stringify(rstUpdateIssueResponse, null, 2)}`
@@ -29272,7 +29280,9 @@ async function RunAction() {
         }
         // BLOCKEND: Update Issue Rest Block
       } else {
-        // TODO: Insert a Console Message for Information
+        pkgCORE.info(
+          "\u001b[1;38;2;255;255;0mThe issue's milestone has been changed, and the demilestone request has been cancelled."
+        )
       }
     }
 
