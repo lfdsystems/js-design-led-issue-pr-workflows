@@ -29208,6 +29208,7 @@ async function RunAction() {
   try {
     // Define the variables for the workflow step here
     // Const Variables
+    const usrBot = 'bot-lfdsystems'
     const issNumber = actPAYLOAD.issue.number
     const cmtBody =
       '>[!Important]\n' +
@@ -29223,31 +29224,35 @@ async function RunAction() {
     let rstCreateCommentResponse
 
     // Write the workflow step code here
-    // BLOCKSTART: Create Comment Rest Block
-    try {
-      rstCreateCommentResponse = await gthOCTOKIT.rest.issues.createComment({
-        owner: repOWNERLOGIN,
-        repo: gthREPONAME,
-        issue_number: issNumber,
-        body: cmtBody
-      })
+    if (actSENDERLOGIN === usrBot) {
+      // BLOCKSTART: Create Comment Rest Block
+      try {
+        rstCreateCommentResponse = await gthOCTOKIT.rest.issues.createComment({
+          owner: repOWNERLOGIN,
+          repo: gthREPONAME,
+          issue_number: issNumber,
+          body: cmtBody
+        })
 
-      // TODO: Insert a Console Message for Success - Create Comment Rest
+        // TODO: Insert a Console Message for Success - Create Comment Rest
 
-      // TODO: Display the Create Comment Rest Response - TO BE DELETED AFTER THE CODE IS FINALISED
-      pkgCORE.info(
-        `\u001b[1;38;2;33;158;188mThe Create Comment Rest Response is shown below:\n${JSON.stringify(rstCreateCommentResponse, null, 2)}`
-      )
-    } catch (error) {
-      // Fail the workflow step if an error occurs
-      // TODO: Insert a Console Message for Failure - Create Comment Rest
-      pkgCORE.setFailed(error.message)
-      pkgCORE.info(
-        `\u001b[1;38;2;255;255;0mThe Create Comment Rest Response is shown below:\n${JSON.stringify(rstCreateCommentResponse, null, 2)}`
-      )
-      return
+        // TODO: Display the Create Comment Rest Response - TO BE DELETED AFTER THE CODE IS FINALISED
+        pkgCORE.info(
+          `\u001b[1;38;2;33;158;188mThe Create Comment Rest Response is shown below:\n${JSON.stringify(rstCreateCommentResponse, null, 2)}`
+        )
+      } catch (error) {
+        // Fail the workflow step if an error occurs
+        // TODO: Insert a Console Message for Failure - Create Comment Rest
+        pkgCORE.setFailed(error.message)
+        pkgCORE.info(
+          `\u001b[1;38;2;255;255;0mThe Create Comment Rest Response is shown below:\n${JSON.stringify(rstCreateCommentResponse, null, 2)}`
+        )
+        return
+      }
+      // BLOCKEND: Create Comment Rest Block
+    } else {
+      // TODO: Insert a Console Message for Information - Manaul Demilestone Issue
     }
-    // BLOCKEND: Create Comment Rest Block
 
     // TODO: Display the Action Payload - TO BE DELETED AFTER THE CODE IS FINALISED
     pkgCORE.info(
