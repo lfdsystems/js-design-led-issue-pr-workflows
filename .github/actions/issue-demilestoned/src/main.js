@@ -63,7 +63,7 @@ async function RunAction() {
       // BLOCKEND: Create Comment Rest Block
     } else {
       pkgCORE.info(
-        '\u001b[1;38;2;255;255;0mThe issue has been manually demilestoned, and the demilestone request has been cancelled.'
+        '\u001b[1;38;2;255;255;0mThe issue has been manually demilestoned, and the insert comment request has been cancelled.'
       )
     }
 
