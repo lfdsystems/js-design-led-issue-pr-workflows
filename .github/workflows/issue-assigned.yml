@@ -1,0 +1,27 @@
+# Name of the Action
+name: Issue Assigned
+
+# Event when this Action is triggered
+on:
+  issues:
+    types:
+      - assigned
+
+# Jobs that this Action will perform
+jobs:
+  issue-assigned:
+    name: Issue Assigned
+    runs-on: ubuntu-latest
+    steps:
+      # Initial Repository Checkout required to execute local action
+      - name: Checkout Repository
+        id: checkout-repository
+        uses: actions/checkout@main
+
+      # The local action that is to be executed
+      - name: Analyze the Issue
+        id: analyze-issue
+        if: steps.checkout-repository.outcome == 'success'
+        uses: ./.github/actions/issue-assigned
+        with:
+          GITHUBTOKEN: ${{ secrets.REPO_PAT }}

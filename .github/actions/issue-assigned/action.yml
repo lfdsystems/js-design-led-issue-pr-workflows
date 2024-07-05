@@ -1,0 +1,18 @@
+# Action Details
+name: Issue Assigned
+description: This GitHub Action analyzes the issue and assigns it if it follows the workflow criteria or unassigns it if it doesnot ensuring adherence to the repository policy
+author: LFD Systems
+
+# Define your inputs here
+inputs:
+  GITHUBTOKEN:
+    description: The GitHub Personal Access Token
+    default: ${{ github.token }}
+    required: true
+
+# Define your outputs here.
+
+# Runs On
+runs:
+  using: node20
+  main: dist/index.js
